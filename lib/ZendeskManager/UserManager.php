@@ -6,6 +6,7 @@ class UserManager extends ZendeskManager implements UserManagerInterface
 {
     const USER_LIST = '/api/v2/users.json';
 	const USER_SEARCH = '/api/v2/users/search.json?query=%query%';
+	const USER_TICKETS = '/api/v2/users/%id%/tickets/requested.json';
 
     public function getUsers()
     {

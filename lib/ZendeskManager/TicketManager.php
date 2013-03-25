@@ -23,6 +23,17 @@ class TicketManager extends ZendeskManager implements TicketManagerInterface
 
         return $tickets;
     }
+	
+	public function getUserTickets(\ZendeskManager\User $user)
+    {
+        $this->browser->get($this->url . str_replace('%id%', $user->getId(), UserManager::USER_TICKETS));
+        $ticketsData = $this->getResponse()->tickets;
+        $tickets = array_map(function($value) {
+			return new Ticket($value);
+		}, $ticketsData);
+
+        return $tickets;
+    }
 
     public function createTicket(TicketInterface $ticket)
     {
