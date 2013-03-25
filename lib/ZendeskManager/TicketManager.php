@@ -17,10 +17,9 @@ class TicketManager extends ZendeskManager implements TicketManagerInterface
     {
         $this->browser->get($this->url . self::TICKET_LIST);
         $ticketsData = $this->getResponse()->tickets;
-        $tickets = array_map(function($value)
-                {
-                    return new Ticket($value);
-                }, $ticketsData);
+        $tickets = array_map(function($value) {
+			return new Ticket($value);
+		}, $ticketsData);
 
         return $tickets;
     }
@@ -28,7 +27,7 @@ class TicketManager extends ZendeskManager implements TicketManagerInterface
     public function createTicket(TicketInterface $ticket)
     {
         $this->browser->post(
-                $this->url . self::TICKET_CREATE, array('Content-Type: application/json'), $ticket->convertToJson()
+			$this->url . self::TICKET_CREATE, array('Content-Type: application/json'), $ticket->convertToJson()
         );
 
         return new Ticket($this->getResponse()->ticket);
