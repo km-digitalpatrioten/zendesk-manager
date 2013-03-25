@@ -3,33 +3,35 @@
 namespace ZendeskManager;
 
 class Ticket implements TicketInterface {
-    
-    protected $id;
-    protected $externalId;
-    protected $url;
-    protected $createdAt;
-    protected $updatedAt;
-    protected $type = 'task';
-    protected $subject;
-    protected $description;
-    protected $priority;
-    protected $status;
-    protected $recipient;
-    protected $requesterId;
-    protected $submitterId;
-    protected $assigneeId;
-    protected $organizationId;
-    protected $groupId;
-    protected $collaboratorIds;
-    protected $forumTopicId;
-    protected $problemId;
-    protected $hasIncidents;
-    protected $dueAt;
-    protected $tags = array();
-    protected $via;
-    protected $customFields = array();
-    protected $satisfactionRating;
-    protected $sharingAgreementIds;
+	
+	protected $id;
+	protected $url;
+	protected $externalId;
+	protected $type;
+	protected $subject;
+	protected $description;
+	protected $priority;
+	protected $status;
+	protected $recipient;
+	protected $requesterId;
+	protected $submitterId;
+	protected $assigneeId;
+	protected $organizationId;
+	protected $groupId;
+	protected $collaboratorIds = array();
+	protected $forumTopicId;
+	protected $problemId;
+	protected $hasIncidents;
+	protected $dueAt;
+	protected $tags = array();
+	protected $via;
+	protected $customFields = array();
+	protected $satisfactionRating;
+	protected $sharingAgreementIds = array();
+	protected $followupIds = array();
+	protected $ticketFormId;
+	protected $createdAt;
+	protected $updatedAt;
     
     protected static $writableProperties = array(
         'externalId',
@@ -96,193 +98,343 @@ class Ticket implements TicketInterface {
         return json_encode($parameters);
     }
     
-    public function setExternalId($externalId)
-    {
-        $this->externalId = $externalId;
-        
-        return $this;
-    }
+	public function getId() 
+	{
+		return $this->id;
+	}
 
-    public function setType($type)
-    {
-        $this->type = $type;
-        
-        return $this;
-    }
+	public function setId($id) 
+	{
+		$this->id = $id;
+		
+		return $this;
+	}
 
-    public function setSubject($subject)
-    {
-        $this->subject = $subject;
-        
-        return $this;
-    }
+	public function getUrl() 
+	{
+		return $this->url;
+	}
 
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
+	public function setUrl($url) 
+	{
+		$this->url = $url;
+		
+		return $this;
+	}
 
-    public function setPriority($priority)
-    {
-        $this->priority = $priority;
-        
-        return $this;
-    }
+	public function getExternalId() 
+	{
+		return $this->externalId;
+	}
 
-    public function setStatus($status)
-    {
-        $this->status = $status;
-        
-        return $this;
-    }
+	public function setExternalId($externalId) 
+	{
+		$this->externalId = $externalId;
+		
+		return $this;
+	}
 
-    public function setDueAt($dueAt)
-    {
-        $this->dueAt = $dueAt;
-        
-        return $this;
-    }
+	public function getType() 
+	{
+		return $this->type;
+	}
 
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-    }
-    
-    public function addTag($tag) {
-        $this->tags[] = $tag;
-        
-        return $this;
-    }
-    
-    public function getId()
-    {
-        return $this->id;
-    }
+	public function setType($type) 
+	{
+		$this->type = $type;
+		
+		return $this;
+	}
 
-    public function getExternalId()
-    {
-        return $this->externalId;
-    }
+	public function getSubject() 
+	{
+		return $this->subject;
+	}
 
-    public function getUrl()
-    {
-        return $this->url;
-    }
+	public function setSubject($subject) 
+	{
+		$this->subject = $subject;
+		
+		return $this;
+	}
 
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
+	public function getDescription() 
+	{
+		return $this->description;
+	}
 
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
+	public function setDescription($description) 
+	{
+		$this->description = $description;
+		
+		return $this;
+	}
 
-    public function getType()
-    {
-        return $this->type;
-    }
+	public function getPriority() 
+	{
+		return $this->priority;
+	}
 
-    public function getSubject()
-    {
-        return $this->subject;
-    }
+	public function setPriority($priority) 
+	{
+		$this->priority = $priority;
+		
+		return $this;
+	}
 
-    public function getDescription()
-    {
-        return $this->description;
-    }
+	public function getStatus() 
+	{
+		return $this->status;
+	}
 
-    public function getPriority()
-    {
-        return $this->priority;
-    }
+	public function setStatus($status) 
+	{
+		$this->status = $status;
+		
+		return $this;
+	}
 
-    public function getStatus()
-    {
-        return $this->status;
-    }
+	public function getRecipient() 
+	{
+		return $this->recipient;
+	}
 
-    public function getRecipient()
-    {
-        return $this->recipient;
-    }
+	public function setRecipient($recipient) 
+	{
+		$this->recipient = $recipient;
+		
+		return $this;
+	}
 
-    public function getRequesterId()
-    {
-        return $this->requesterId;
-    }
+	public function getRequesterId() 
+	{
+		return $this->requesterId;
+	}
 
-    public function getSubmitterId()
-    {
-        return $this->submitterId;
-    }
+	public function setRequesterId($requesterId) 
+	{
+		$this->requesterId = $requesterId;
+		
+		return $this;
+	}
 
-    public function getAssigneeId()
-    {
-        return $this->assigneeId;
-    }
+	public function getSubmitterId() 
+	{
+		return $this->submitterId;
+	}
 
-    public function getOrganizationId()
-    {
-        return $this->organizationId;
-    }
+	public function setSubmitterId($submitterId) 
+	{
+		$this->submitterId = $submitterId;
+		
+		return $this;
+	}
 
-    public function getGroupId()
-    {
-        return $this->groupId;
-    }
+	public function getAssigneeId() 
+	{
+		return $this->assigneeId;
+	}
 
-    public function getCollaboratorIds()
-    {
-        return $this->collaboratorIds;
-    }
+	public function setAssigneeId($assigneeId) 
+	{
+		$this->assigneeId = $assigneeId;
+		
+		return $this;
+	}
 
-    public function getForumTopicId()
-    {
-        return $this->forumTopicId;
-    }
+	public function getOrganizationId() 
+	{
+		return $this->organizationId;
+	}
 
-    public function getProblemId()
-    {
-        return $this->problemId;
-    }
+	public function setOrganizationId($organizationId) 
+	{
+		$this->organizationId = $organizationId;
+		
+		return $this;
+	}
 
-    public function getHasIncidents()
-    {
-        return $this->hasIncidents;
-    }
+	public function getGroupId() 
+	{
+		return $this->groupId;
+	}
 
-    public function getDueAt()
-    {
-        return $this->dueAt;
-    }
+	public function setGroupId($groupId) 
+	{
+		$this->groupId = $groupId;
+		
+		return $this;
+	}
 
-    public function getTags()
-    {
-        return $this->tags;
-    }
+	public function getCollaboratorIds() 
+	{
+		return $this->collaboratorIds;
+	}
 
-    public function getVia()
-    {
-        return $this->via;
-    }
+	public function setCollaboratorIds($collaboratorIds) 
+	{
+		$this->collaboratorIds = $collaboratorIds;
+		
+		return $this;
+	}
 
-    public function getCustomFields()
-    {
-        return $this->customFields;
-    }
+	public function getForumTopicId() 
+	{
+		return $this->forumTopicId;
+	}
 
-    public function getSatisfactionRating()
-    {
-        return $this->satisfactionRating;
-    }
+	public function setForumTopicId($forumTopicId) 
+	{
+		$this->forumTopicId = $forumTopicId;
+		
+		return $this;
+	}
 
-    public function getSharingAgreementIds()
-    {
-        return $this->sharingAgreementIds;
-    }
+	public function getProblemId() 
+	{
+		return $this->problemId;
+	}
+
+	public function setProblemId($problemId) 
+	{
+		$this->problemId = $problemId;
+		
+		return $this;
+	}
+
+	public function getHasIncidents() 
+	{
+		return $this->hasIncidents;
+	}
+
+	public function setHasIncidents($hasIncidents) 
+	{
+		$this->hasIncidents = $hasIncidents;
+		
+		return $this;
+	}
+
+	public function getDueAt() 
+	{
+		return $this->dueAt;
+	}
+
+	public function setDueAt($dueAt) 
+	{
+		$this->dueAt = $dueAt;
+		
+		return $this;
+	}
+
+	public function getTags() 
+	{
+		return $this->tags;
+	}
+
+	public function setTags($tags) 
+	{
+		$this->tags = $tags;
+		
+		return $this;
+	}
+
+	public function getVia() 
+	{
+		return $this->via;
+	}
+
+	public function setVia($via) 
+	{
+		$this->via = $via;
+		
+		return $this;
+	}
+
+	public function getCustomFields() 
+	{
+		return $this->customFields;
+	}
+
+	public function setCustomFields($customFields) 
+	{
+		$this->customFields = $customFields;
+		
+		return $this;
+	}
+
+	public function getSatisfactionRating() 
+	{
+		return $this->satisfactionRating;
+	}
+
+	public function setSatisfactionRating($satisfactionRating) 
+	{
+		$this->satisfactionRating = $satisfactionRating;
+		
+		return $this;
+	}
+
+	public function getSharingAgreementIds() 
+	{
+		return $this->sharingAgreementIds;
+	}
+
+	public function setSharingAgreementIds($sharingAgreementIds) 
+	{
+		$this->sharingAgreementIds = $sharingAgreementIds;
+		
+		return $this;
+	}
+
+	public function getFollowupIds() 
+	{
+		return $this->followupIds;
+	}
+
+	public function setFollowupIds($followupIds) 
+	{
+		$this->followupIds = $followupIds;
+		
+		return $this;
+	}
+
+	public function getTicketFormId() 
+	{
+		return $this->ticketFormId;
+	}
+
+	public function setTicketFormId($ticketFormId) 
+	{
+		$this->ticketFormId = $ticketFormId;
+		
+		return $this;
+	}
+
+	public function getCreatedAt() 
+	{
+		return $this->createdAt;
+	}
+
+	public function setCreatedAt($createdAt) 
+	{
+		$this->createdAt = $createdAt;
+		
+		return $this;
+	}
+
+	public function getUpdatedAt() 
+	{
+		return $this->updatedAt;
+	}
+
+	public function setUpdatedAt($updatedAt) 
+	{
+		$this->updatedAt = $updatedAt;
+		
+		return $this;
+	}
+
+
 
 
 }
