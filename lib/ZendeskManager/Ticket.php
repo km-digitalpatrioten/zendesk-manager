@@ -65,7 +65,12 @@ class Ticket implements TicketInterface {
             if ($value && in_array($property, self::$dateTimeProperties)) {
                 $value = new \DateTime($value, new \DateTimeZone('UTC'));
             }
-            $this->$property = $value;
+            
+			$methodName = 'set'.$property;
+			if (method_exists($this, $methodName)) 
+			{ 
+				call_user_func(array($this, $methodName), $value); 
+			}
         }
     }
     
