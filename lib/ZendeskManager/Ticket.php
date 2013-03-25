@@ -434,7 +434,4 @@ class Ticket implements TicketInterface {
 		return $this;
 	}
 
-
-
-
 }
