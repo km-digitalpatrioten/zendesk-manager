@@ -1,6 +1,6 @@
 <?php
 
-namespace ZendeskTicketManager\Exception;
+namespace ZendeskManager\Exception;
 
 class UnexpectedResponseException extends \RuntimeException {
      

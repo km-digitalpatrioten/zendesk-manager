@@ -1,6 +1,6 @@
 <?php
 
-namespace ZendeskTicketManager;
+namespace ZendeskManager;
 
 class Ticket implements TicketInterface {
     

@@ -1,9 +1,9 @@
 <?php
 
-namespace ZendeskTicketManager;
+namespace ZendeskManager;
 
 use Buzz\Browser;
-use ZendeskTicketManager\Exception;
+use ZendeskManager\Exception;
 
 class TicketManager implements TicketManagerInterface
 {

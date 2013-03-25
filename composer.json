@@ -1,15 +1,14 @@
 {
-    "name": "moein/zendesk-ticket-manager",
-    "description": "Zendesk Ticket manager class",
+    "name": "arnaslu/zendesk-manager",
+    "description": "Zendesk API",
     "keywords": ["zendesk", "api", "ticket"],
-    "homepage": "https://github.com/moein/ZendeskTicketManager",
+    "homepage": "https://github.com/arnaslu/zendesk-manager",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Moein Akbarof",
-            "email": "moein.ak@gmail.com",
-            "homepage": "http://imaprogrammer.wordpress.com/"
+            "name": "Arnas Lukosevicius",
+            "email": "arnaslu@gmail.com"
         }
     ],
     "require": {
@@ -21,7 +20,7 @@
     },
     "autoload": {
         "psr-0": {
-            "ZendeskTicketManager": "lib/"
+            "ZendeskManager": "lib/"
         }
     }
 }
