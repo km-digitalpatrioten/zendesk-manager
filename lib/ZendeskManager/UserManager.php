@@ -5,6 +5,7 @@ namespace ZendeskManager;
 class UserManager extends ZendeskManager implements UserManagerInterface
 {
     const USER_LIST = '/api/v2/users.json';
+	const USER_SEARCH = '/api/v2/users/search.json?query=%query%';
 
     public function getUsers()
     {
@@ -17,4 +18,15 @@ class UserManager extends ZendeskManager implements UserManagerInterface
         return $users;
     }
 
+	public function searchUsers($query)
+    {
+        $this->browser->get($this->url . str_replace('%query%', $query, self::USER_SEARCH));
+        $usersData = $this->getResponse()->users;
+        $users = array_map(function($value){
+			return new User($value);
+		}, $usersData);
+
+        return $users;
+    }
+	
 }
