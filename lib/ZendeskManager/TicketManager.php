@@ -4,6 +4,7 @@ namespace ZendeskManager;
 
 class TicketManager extends ZendeskManager implements TicketManagerInterface
 {
+	const TICKET_AUDIT = '/api/v2/tickets/%id%/audits.json';
     const TICKET_LIST = '/api/v2/tickets.json';
     const TICKET_CREATE = '/api/v2/tickets.json';
     const TICKET_WEB_URL = '/agent/#/tickets/%id%';
@@ -22,6 +23,13 @@ class TicketManager extends ZendeskManager implements TicketManagerInterface
 		}, $ticketsData);
 
         return $tickets;
+    }
+	
+	public function getTicketAudit(\ZendeskManager\Ticket $ticket)
+    {
+        $this->browser->get($this->url . str_replace('%id%', $ticket->getId(), self::TICKET_AUDIT));
+		
+		return $ticketsData = $this->getResponse()->audits;
     }
 	
 	public function getUserTickets(\ZendeskManager\User $user)
