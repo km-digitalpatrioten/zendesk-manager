@@ -3,8 +3,12 @@
 namespace ZendeskManager;
 
 interface TicketManagerInterface {
-    
+
     public function createTicket(TicketInterface $ticket);
-    
-    public function getTickets();
+
+    /**
+     * @param int $page
+     * @return mixed
+     */
+    public function getTickets($page = 1);
 }
